@@ -40,6 +40,9 @@ class SaleOrderDTOController {
 
     @GetMapping("/sale/view/{id}")
     fun getSaleOrderView (@PathVariable id:Long): SaleOrderView {
-        return saleOrderDTORepository.findById(id, SaleOrderView::class.java)
+
+        val rs = saleOrderDTORepository.findById(id)
+
+        return rs
     }
 }

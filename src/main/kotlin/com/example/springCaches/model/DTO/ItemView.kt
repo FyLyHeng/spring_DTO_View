@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Value
  */
 interface ItemView {
 
-    @get:Value("#{target.itemName + ' ' + target.cost}")
-    var itemFullName : String
+//    @get:Value("#{target.itemName + ' ' + target.cost}")
+//    var itemFullName : String
 
     var cost:Double
 }
