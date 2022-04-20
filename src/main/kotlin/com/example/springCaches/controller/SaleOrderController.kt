@@ -7,18 +7,17 @@ import com.example.springCaches.service.SaleOrderEntityTestService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.persistence.EntityManager
+import javax.transaction.Transactional
 
 @RestController
 @RequestMapping("/sale-order")
+@Transactional
 class SaleOrderController {
     @Autowired
     lateinit var saleOrderEntityTestService: SaleOrderEntityTestService
 
     @Autowired
     lateinit var saleOrderRepository: SaleOrderRepository
-
-    @Autowired
-    lateinit var testRepository: TestRepository
 
 
 
@@ -61,10 +60,13 @@ class SaleOrderController {
         return saleOrderPage?.content
     }
 
+    @GetMapping("/all")
+    fun findAll (): MutableList<SaleOrder> {
+        return saleOrderRepository.findAll().toMutableList()
+    }
+
 
     lateinit var entityManager : EntityManager
-
-
     @GetMapping("/testing")
     fun testRAWNameGraph() : List<SaleOrder?> {
 

@@ -1,18 +1,20 @@
 package com.example.springCaches.repo
 
 import com.example.springCaches.model.SaleOrder
-import org.springframework.context.annotation.Bean
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.jpa.repository.EntityGraph
+import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.LOAD
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
+import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithProjection
 import java.util.*
-import javax.persistence.EntityManager
-import javax.persistence.PersistenceContext
-import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.*
 
 
 @Repository
-interface SaleOrderRepository : JpaRepository<SaleOrder,Long> {
+interface SaleOrderRepository : JpaRepository<SaleOrder,Long> , JpaSpecificationExecutorWithProjection<SaleOrder, Long>{
 
     /**
      * @EntityNameGraph level 1
@@ -46,4 +48,10 @@ interface SaleOrderRepository : JpaRepository<SaleOrder,Long> {
     @EntityGraph(attributePaths = ["saleOrderDetail.invoice.saleOrderDetail"],type = LOAD)
     fun findAllByTotalCost(cost: Double):List<SaleOrder>
 
+
+
+
+    override fun findAll () : List<SaleOrder>
+
+    override fun <R : Any?> findAll(p0: Specification<SaleOrder>?, p1: Class<R>?, p2: Pageable?): Page<R>
 }

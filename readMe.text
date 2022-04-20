@@ -1,0 +1,10 @@
+*** OBJMapping DTO
+    + pros:
+            - easy to use
+            - possible for custom nest DTO
+            - not select the one-to-many if not include in DTO
+    + cons:
+            - select all field of parent class (include one-to-one relationship)
+            - for one-to-one are select by n+1 statement (might got n+1 issues problem if data are too big)
+            - the nest DTO are also select the all fields
+            - for one-to-many select query using "let outer join" for the nest-nest OBJ

@@ -7,14 +7,15 @@ import javax.persistence.*
 
 @Entity
 class Invoice(
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = 0,
-        var amount: Double? = 0.0,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = 0,
+    var amount: Double? = 0.0,
 
 
-        @JsonIgnore
-        @ManyToOne(fetch = FetchType.LAZY)
-        var saleOrderDetail: SaleOrderDetail? = null
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "sale_invoice_id", insertable = true, updatable = false, nullable = true)
+    var saleOrder: SaleOrder? = null
 
 )

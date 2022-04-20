@@ -8,9 +8,12 @@ import com.example.springCaches.repo.SaleOrderDTORepository
 import com.example.springCaches.service.ItemService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import javax.transaction.Transactional
+
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/raw-dto")
+@Transactional
 class SaleOrderDTOController {
     @Autowired
     lateinit var itemService: ItemService
@@ -32,17 +35,17 @@ class SaleOrderDTOController {
     }
 
 
-    @GetMapping("/sale/dto/{id}")
-    fun getSaleOrderDTO (@PathVariable id:Long): SaleOrderDTO {
-        return saleOrderDTORepository.findById(id,SaleOrderDTO::class.java)
-    }
+//    @GetMapping("/sale/dto/{id}")
+//    fun getSaleOrderDTO (@PathVariable id:Long): SaleOrderDTO {
+//        return saleOrderDTORepository.findById(id,SaleOrderDTO::class.java)
+//    }
 
 
-    @GetMapping("/sale/view/{id}")
-    fun getSaleOrderView (@PathVariable id:Long): SaleOrderView {
-
-        val rs = saleOrderDTORepository.findById(id)
-
-        return rs
-    }
+//    @GetMapping("/sale/view/{id}")
+//    fun getSaleOrderView (@PathVariable id:Long): SaleOrderView {
+//
+//        val rs = saleOrderDTORepository.findById(id)
+//
+//        return rs
+//    }
 }

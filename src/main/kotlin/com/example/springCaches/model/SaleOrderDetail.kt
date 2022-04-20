@@ -13,14 +13,12 @@ class SaleOrderDetail(
 
         @JsonIgnore
         @ManyToOne
-        @JoinColumn(name = "sale_order_id")
-        var saleOrder: SaleOrder? = null,
+        @JoinColumn(name = "sale_order_id", insertable = true, updatable = false,nullable = true)
+        var saleOrder : SaleOrder? = null,
 
 
-        @OneToOne(fetch = FetchType.LAZY)
+        @OneToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "item_id")
-        var item: Item? = null,
+        var item: Item? = null
 
-        @OneToMany(mappedBy = "saleOrderDetail", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-        var invoice: MutableList<Invoice>? = null
 )

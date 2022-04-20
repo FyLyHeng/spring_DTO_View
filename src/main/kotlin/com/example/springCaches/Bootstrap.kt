@@ -43,7 +43,11 @@ class Bootstrap : CommandLineRunner {
 
         val bc = barcodeSale.save(BarcodeSale())
 
-        val sd = SaleOrderDetail(qty = 1f, amount = 100.0, item = Item(id = 1), saleOrder = SaleOrder(id = 1))
-        saleOrderRepository.save(SaleOrder(dateDelivery = Date(), totalQty = 1, grandTotal = 100f,totalCost = 100.0, saleOrderDetail = mutableListOf(sd), barcodeSale = bc))
+        val sd = SaleOrderDetail(qty = 1f, amount = 100.0, item = Item(id = 1))
+        val inv = Invoice(amount = 100.0)
+
+        saleOrderRepository.save(SaleOrder(dateDelivery = Date(), totalQty = 1, grandTotal = 100f,totalCost = 100.0, barcodeSale = bc ,
+            saleOrderDetail = mutableListOf(sd),
+            invoices = mutableListOf(inv) ))
     }
 }
